@@ -6,7 +6,7 @@ Implements Principal Component Analysis with all specified features that can be 
 
 import numpy as np
 
-# Feature Configuration - Comment out lines to exclude features
+# Feature Configuration 
 FEATURE_TYPES = [
     'band_power',           # Band power for each frequency band
     'relative_power',       # Relative power for each frequency band
@@ -30,25 +30,33 @@ FEATURE_CHANNELS = [
 ]
 
 FREQ_BANDS = [
-    'delta',    # 0.5-4 Hz
-    'theta',    # 4-8 Hz
+
     'alpha',    # 8-12 Hz
     'beta',     # 12-30 Hz
     'gamma'     # 30-50 Hz
+
+    # will be removed
+    'delta',    # 0.5-4 Hz 
+    'theta',    # 4-8 Hz 
+    
 ]
 
-# Power ratio combinations - Comment out lines to exclude specific ratios
+# Power ratio combinations 
 POWER_RATIO_COMBINATIONS = [
-    ('alpha', 'beta'),      # Alpha/Beta ratio
-    ('theta', 'alpha'),     # Theta/Alpha ratio
-    ('delta', 'theta'),     # Delta/Theta ratio
+    ('alpha', 'beta'),      # Alpha/Beta ratio 
     ('beta', 'gamma'),      # Beta/Gamma ratio
-    ('alpha', 'theta'),     # Alpha/Theta ratio
-    ('delta', 'alpha'),     # Delta/Alpha ratio
-    ('theta', 'beta'),      # Theta/Beta ratio
     ('gamma', 'alpha'),     # Gamma/Alpha ratio
+
+    # will be commented below
+    ('gamma', 'theta'),     # Gamma/Theta ratio
+    ('theta', 'alpha'),     # Theta/Alpha ratio
+    ('alpha', 'theta'),     # Alpha/Theta ratio
+    ('theta', 'beta'),      # Theta/Beta ratio
+    
+    ('delta', 'theta'),     # Delta/Theta ratio
+    ('delta', 'alpha'),     # Delta/Alpha ratio
     ('delta', 'beta'),      # Delta/Beta ratio
-    ('gamma', 'theta')      # Gamma/Theta ratio
+
 ]
 
 class SimplePCA:
@@ -386,10 +394,10 @@ def create_custom_reducer():
     # Comment out features you don't want
     custom_feature_types = [
         'band_power',
-        # 'relative_power',     # Commented out
+        # 'relative_power',    
         'power_ratios',
         'spectral_entropy',
-        # 'peak_frequency'      # Commented out
+        # 'peak_frequency' 
     ]
     
     # Comment out channels you don't want
@@ -397,37 +405,39 @@ def create_custom_reducer():
         'Fz',
         'Cz',
         'Pz',
-        # 'C3',    # Commented out
-        # 'C4',    # Commented out
+        'C3',
+        'C4',
         'F3',
         'F4',
-        # 'P3',    # Commented out
-        # 'P4',    # Commented out
-        # 'O1',    # Commented out
-        # 'O2'     # Commented out
+        'P3',
+        'P4',
+        'O1',
+        'O2' 
     ]
     
     # Comment out frequency bands you don't want
     custom_freq_bands = [
-        # 'delta',    # Commented out
-        'theta',
         'alpha',
         'beta',
-        # 'gamma'     # Commented out
+        'gamma'
+        # 'theta',
+        # 'delta',        
     ]
     
     # Comment out power ratios you don't want
     custom_power_ratios = [
-        ('alpha', 'beta'),
-        ('theta', 'alpha'),
-        # ('delta', 'theta'),     # Commented out
-        # ('beta', 'gamma'),      # Commented out
-        # ('alpha', 'theta'),     # Commented out
-        # ('delta', 'alpha'),     # Commented out
-        # ('theta', 'beta'),      # Commented out
-        # ('gamma', 'alpha'),     # Commented out
-        # ('delta', 'beta'),      # Commented out
-        # ('gamma', 'theta')      # Commented out
+        ('alpha', 'beta'),      # Alpha/Beta ratio 
+        ('beta', 'gamma'),      # Beta/Gamma ratio
+        ('gamma', 'alpha'),     # Gamma/Alpha ratio
+
+        # ('gamma', 'theta')      # Gamma/Theta ratio
+        # ('theta', 'alpha'),     # Theta/Alpha ratio
+        # ('alpha', 'theta'),     # Alpha/Theta ratio
+        # ('theta', 'beta'),      # Theta/Beta ratio
+        
+        # ('delta', 'theta'),     # Delta/Theta ratio
+        # ('delta', 'alpha'),     # Delta/Alpha ratio
+        # ('delta', 'beta'),      # Delta/Beta ratio
     ]
     
     reducer = EEGDimensionalityReducer(
